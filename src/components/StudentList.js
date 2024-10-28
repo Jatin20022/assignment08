@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import studentData from '../data.json'; // Adjust the path based on your project structure
-
 
 const StudentList = () => {
     const [students, setStudents] = useState([]);
@@ -35,9 +35,11 @@ const StudentList = () => {
     const totalPages = Math.ceil(filteredStudents.length / studentsPerPage);
 
     const handleDelete = (id) => {
-        // Logic to delete a student (optional: implement this)
-        const updatedStudents = students.filter(student => student.id !== id);
-        setStudents(updatedStudents);
+        const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+        if (confirmDelete) {
+            const updatedStudents = students.filter(student => student.id !== id);
+            setStudents(updatedStudents);
+        }
     };
 
     return (
@@ -66,7 +68,10 @@ const StudentList = () => {
                             <td>{student.email}</td>
                             <td>{student.class}</td>
                             <td>
-                                <button onClick={() => console.log('View', student.id)}>View</button>
+                                {/* Update View button to link to StudentDetails page */}
+                                <Link to={`/students/${student.id}`}>
+                                    <button>View</button>
+                                </Link>
                                 <button onClick={() => console.log('Edit', student.id)}>Edit</button>
                                 <button onClick={() => handleDelete(student.id)}>Delete</button>
                             </td>

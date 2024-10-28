@@ -6,10 +6,10 @@ import StudentRegistration from "./components/StudentRegistration";
 import StudentDetails from "./components/StudentDetails";
 import EditStudent from "./components/EditStudent";
 import data from "./data.json";
-import './App.css'
+import './App.css';
 
 function App() {
-  const [students, setStudents] = useState(data);
+  const [students, setStudents] = useState(data.students); // Ensure you're using the correct structure of your data
 
   const addStudent = (newStudent) => {
     setStudents([...students, newStudent]);
@@ -42,7 +42,7 @@ function App() {
           />
           <Route
             path="/students/:id"
-            element={<StudentDetails students={students} />}
+            element={<StudentDetails students={students} deleteStudent={deleteStudent} />}
           />
           <Route
             path="/students/:id/edit"

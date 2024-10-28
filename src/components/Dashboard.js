@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import studentData from '../data.json'; // Adjust the path as needed
 
 const Dashboard = () => {
-    const totalStudents = studentData.length;
-    const classCounts = studentData.students.reduce((acc, student) => {
-      const className = student.class;
-      acc[className] = (acc[className] || 0) + 1;
-      return acc;
-  }, {});
+    const [totalStudents, setTotalStudents] = useState(0);
+    const [classCounts, setClassCounts] = useState({});
+
+    useEffect(() => {
+        if (studentData && studentData.students) {
+            // Set the total number of students
+            setTotalStudents(studentData.students.length);
+            
+            // Calculate class counts
+            const counts = studentData.students.reduce((acc, student) => {
+                const className = student.class;
+                acc[className] = (acc[className] || 0) + 1;
+                return acc;
+            }, {});
+            setClassCounts(counts);
+        } else {
+            console.error("No student data found!");
+        }
+    }, []);
+
     return (
         <div className="dashboard">
             <nav className="navbar">

@@ -9,7 +9,13 @@ const StudentDetails = ({ students }) => {
 
   return (
     <div>
-      <h1>{student.name}</h1>
+      <h1 style={{color:'red', textAlign: 'center'}}>Student Detail</h1>
+      <h2>Name: {student.name}</h2>
+      <h2>Email: {student.email}</h2>
+      <h2>Age: {student.age}</h2>
+      <h2>Class: {student.class}</h2>
+      <h2>Address: {student.address}</h2>
+      <h2>Phone number: {student.phone}</h2>
       {/* Display all student details here */}
     </div>
   );
